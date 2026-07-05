@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Amir Shahzad | Research Portfolio</title>
+  <title>Amir Shahzad | Engineering Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -13,12 +13,13 @@
             sans: ['Inter', 'ui-sans-serif', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif']
           },
           colors: {
-            primary: { DEFAULT: '#6D28D9' },
-            accent: { DEFAULT: '#14B8A6' }
+            primary: { DEFAULT: '#D4AF37' }, /* Gold */
+            accent: { DEFAULT: '#FCD34D' },  /* Light Gold */
+            dark: { DEFAULT: '#050505' }     /* Deep Black */
           },
           boxShadow: {
-            soft: '0 10px 30px -10px rgba(0,0,0,0.25)',
-            glow: '0 10px 40px -10px rgba(109,40,217,0.45)'
+            soft: '0 10px 30px -10px rgba(0,0,0,0.5)',
+            glow: '0 0 25px -5px rgba(212, 175, 55, 0.4)'
           }
         }
       }
@@ -28,17 +29,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --grad-1: linear-gradient(135deg, #6D28D9 0%, #14B8A6 100%);
-      --grad-2: linear-gradient(135deg, #EC4899 0%, #F59E0B 100%);
-      --glass: rgba(255, 255, 255, 0.08);
+      --grad-1: linear-gradient(135deg, #D4AF37 0%, #FCD34D 100%);
+      --glass: rgba(255, 255, 255, 0.03);
     }
     html, body {
       height: 100%;
-      background: radial-gradient(1200px 600px at 80% -10%, rgba(109,40,217,0.25), transparent 60%),
-                  radial-gradient(1000px 500px at -10% 20%, rgba(20,184,166,0.25), transparent 60%),
-                  #0b1020;
+      background-color: #050505;
       color: #e7e9ee;
+      scroll-behavior: smooth;
     }
+    /* ECG Background Video */
     .bg-video {
       position: fixed;
       top: 0;
@@ -47,13 +47,13 @@
       min-height: 100%;
       z-index: -1;
       object-fit: cover;
-      opacity: 0.15;
+      opacity: 0.10; /* Lowered slightly for better contrast with gold text */
       pointer-events: none;
     }
     .glass {
       background: var(--glass);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255,255,255,0.08);
     }
     .btn {
@@ -61,19 +61,23 @@
       transform: translateZ(0);
     }
     .btn:hover {
-      filter: brightness(1.05);
+      filter: brightness(1.1);
       transform: translateY(-1px);
-      box-shadow: 0 12px 30px -10px rgba(109,40,217,0.5);
+      box-shadow: 0 8px 25px -5px rgba(212, 175, 55, 0.4);
     }
     .badge {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
     }
     .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border: 1px solid rgba(255,255,255,0.10);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+    .card:hover {
+      border-color: rgba(212, 175, 55, 0.3);
     }
     .section {
       scroll-margin-top: 90px;
@@ -87,7 +91,7 @@
     .nav-blur {
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      background: rgba(10,12,25,0.6);
+      background: rgba(5, 5, 5, 0.8);
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .media-scroller::-webkit-scrollbar {
@@ -97,159 +101,214 @@
       background: rgba(255,255,255,0.05);
     }
     .media-scroller::-webkit-scrollbar-thumb {
-      background: rgba(20,184,166,0.5);
+      background: rgba(212, 175, 55, 0.5);
       border-radius: 10px;
+    }
+    
+    /* Fast Dynamic Triangle Animation */
+    @keyframes fast-triangle {
+      0% { 
+        transform: rotate(15deg) scale(1); 
+        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); 
+      }
+      50% { 
+        transform: rotate(30deg) scale(1.08) translateY(-10px); 
+        filter: drop-shadow(0 0 35px rgba(252, 211, 77, 0.8)); 
+      }
+      100% { 
+        transform: rotate(15deg) scale(1); 
+        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); 
+      }
+    }
+    .anim-fast-triangle {
+      animation: fast-triangle 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      transform-origin: center center;
     }
   </style>
 </head>
 <body class="font-sans antialiased">
 
+  <!-- Running ECG Background -->
   <img src="Headline_ecg.gif" class="bg-video" alt="ECG Background">
 
+  <!-- Navigation -->
   <header class="fixed top-0 left-0 right-0 z-50 nav-blur">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <a href="#" class="flex items-center gap-3">
-          <div id="navAvatarContainer" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary to-accent shadow-glow flex items-center justify-center overflow-hidden">
-            <span class="font-extrabold text-white">AS</span>
+          <div id="navAvatarContainer" class="w-9 h-9 rounded-xl border border-primary/50 shadow-glow flex items-center justify-center overflow-hidden bg-dark">
+            <span class="font-extrabold text-primary">AS</span>
           </div>
-          <span class="text-xl font-bold tracking-tight">Amir Shahzad</span>
+          <span class="text-xl font-bold tracking-tight text-white">Amir Shahzad</span>
         </a>
-        <nav class="hidden md:flex items-center gap-5 text-sm">
-          <a href="#projects" class="hover:text-white/90 text-white/70">Projects</a>
-          <a href="#achievements" class="hover:text-white/90 text-white/70">Honors</a>
-          <a href="#certificates" class="hover:text-white/90 text-white/70">Webinars</a>
-          <a href="#other-certificates" class="hover:text-white/90 text-white/70">Certificates</a>
-          <a href="#skills" class="hover:text-white/90 text-white/70">Skills</a>
-          <a href="#contact" class="hover:text-white/90 text-white/70">Contact</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#projects" class="hover:text-primary transition-colors text-white/80">Projects</a>
+          <a href="#achievements" class="hover:text-primary transition-colors text-white/80">Honors</a>
+          <a href="#certificates" class="hover:text-primary transition-colors text-white/80">Webinars</a>
+          <a href="#other-certificates" class="hover:text-primary transition-colors text-white/80">Certificates</a>
+          <a href="#skills" class="hover:text-primary transition-colors text-white/80">Skills</a>
+          <a href="#contact" class="hover:text-primary transition-colors text-white/80">Contact</a>
         </nav>
       </div>
     </div>
   </header>
 
-  <section class="pt-28 md:pt-32 pb-16 md:pb-24">
+  <!-- Hero Section (Aligned with requested design) -->
+  <section class="pt-32 pb-16 md:pt-40 md:pb-20 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <div class="inline-flex items-center gap-2 badge rounded-full px-3 py-1 text-xs text-white/80 mb-4">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Biomedical Engineer
-          </div>
-          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
-            Elevating Healthcare through
-            <span class="grad-text">Signal Processing, ML, and IOT based Devices</span>
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        
+        <!-- Left Typography -->
+        <div class="relative z-10">
+          <h3 class="text-xl md:text-2xl font-medium text-white/90">Hello I'm</h3>
+          <h1 class="text-5xl md:text-7xl font-extrabold mt-2 tracking-tight text-white">
+            AMIR SHAHZAD
           </h1>
-          <p class="text-white/70 mt-4 text-lg">
-            Biomedical Engineer specializing in wearable sensors and Experienced in developing end-to-end biopotential acquisition pipelines (ECG, EMG, EOG, EHG, 
-EGG). I have hands-on experience
-building custom instrumentation from scratch, including analog circuit design (PCBs), embedded firmware,
-and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic Medical Devices.
+          <p class="text-lg md:text-xl text-white/70 mt-4 max-w-md font-medium">
+            A Biomedical Engineer Specializing in Wearable Sensors, Signal Processing, and IoT-based Diagnostic Devices.
           </p>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#projects" class="btn px-5 py-3 rounded-xl bg-gradient-to-r from-primary to-accent shadow-glow font-medium">
-              Explore Work
+
+          <div class="mt-8 flex flex-wrap items-center gap-6">
+            <a href="#projects" class="btn px-8 py-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-black font-semibold transition-colors duration-300">
+              Let's Get Started
             </a>
-            <a href="#contact" class="btn px-5 py-3 rounded-xl glass font-medium">
-              Contact Me
+            <a href="#contact" class="group flex items-center gap-3 text-white/80 hover:text-white transition-colors">
+              <span class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary transition-colors">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="translate-x-[1px] group-hover:text-primary"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </span>
+              <span class="font-medium">Contact Me</span>
             </a>
           </div>
         </div>
-        <div class="relative flex justify-center lg:justify-end">
-          <div class="absolute -inset-6 bg-gradient-to-tr from-primary/30 to-accent/30 rounded-3xl blur-2xl"></div>
-          
-          <div class="relative card p-2 shadow-grid max-w-sm w-full">
-            <div id="heroImageContainer" class="w-full h-80 bg-gradient-to-tr from-gray-800 to-gray-700 rounded-xl overflow-hidden flex items-center justify-center">
-                <span class="text-6xl font-bold text-white/20">AS</span>
-            </div>
-            <div class="p-4 text-center">
-                <div class="text-xl font-bold">Amir Shahzad</div>
-                <div class="text-xs text-accent mt-1 font-semibold uppercase tracking-wide">Bachelors of Engineering in Biomedical Engineering</div>
-            </div>
+
+        <!-- Right Profile Image & Dynamic Triangle -->
+        <div class="relative flex justify-center items-center mt-12 lg:mt-0 h-[400px] md:h-[500px]">
+          <!-- Fast Animated Golden Triangle -->
+          <div class="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
+            <svg class="w-[115%] h-[115%] text-primary opacity-80 anim-fast-triangle" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.8">
+              <polygon points="50,5 95,85 5,85" stroke-linejoin="round"/>
+            </svg>
           </div>
+          
+          <!-- Profile Picture -->
+          <div id="heroImageContainer" class="relative z-10 h-full w-auto flex items-end">
+            <!-- Image injected via JS, defaults to placeholder if not found -->
+            <span class="text-6xl font-bold text-white/20">AS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Statistics Bar -->
+      <div class="mt-24 pt-10 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center bg-black/40 rounded-2xl p-6 backdrop-blur-md">
+        <div>
+          <h4 class="text-3xl md:text-4xl font-bold text-white">5+</h4>
+          <p class="text-sm text-white/60 mt-2">Hardware Projects</p>
+        </div>
+        <div>
+          <h4 class="text-3xl md:text-4xl font-bold text-white">1500+</h4>
+          <p class="text-sm text-white/60 mt-2">Community Network</p>
+        </div>
+        <div>
+          <h4 class="text-3xl md:text-4xl font-bold text-white">4+</h4>
+          <p class="text-sm text-white/60 mt-2">Years of Experience</p>
+        </div>
+        <div>
+          <h4 class="text-3xl md:text-4xl font-bold text-white">5+</h4>
+          <p class="text-sm text-white/60 mt-2">Honors & Awards</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Projects Section -->
   <section id="projects" class="section py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-end justify-between gap-4">
         <div>
-          <h2 class="text-3xl font-bold">Hardware & ML Projects</h2>
+          <h2 class="text-3xl font-bold text-white">Hardware & ML Projects</h2>
           <p class="text-white/70 mt-2">Scroll horizontally on the images/videos to view project media.</p>
         </div>
       </div>
       <div id="projectsList" class="mt-8 grid md:grid-cols-2 gap-8">
+        <!-- Injected via JS -->
       </div>
     </div>
   </section>
 
-  <section id="achievements" class="section py-16">
+  <!-- Achievements Section -->
+  <section id="achievements" class="section py-16 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold">Achievements & Honors</h2>
+      <h2 class="text-3xl font-bold text-white">Achievements & Honors</h2>
       <div class="mt-8 grid md:grid-cols-2 gap-4" id="achievementsList">
+        <!-- Injected via JS -->
       </div>
     </div>
   </section>
 
-  <section id="certificates" class="section py-16">
+  <!-- Webinar Certifications -->
+  <section id="certificates" class="section py-16 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold">Webinar Certifications and Training</h2>
+      <h2 class="text-3xl font-bold text-white">Webinar Certifications and Training</h2>
       <p class="text-white/70 mt-2">Official technical courses and professional development.</p>
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="certificatesList">
+        <!-- Injected via JS -->
       </div>
     </div>
   </section>
 
-  <section id="other-certificates" class="section py-16">
+  <!-- Other Certifications -->
+  <section id="other-certificates" class="section py-16 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold">Other Certificates</h2>
+      <h2 class="text-3xl font-bold text-white">Other Certificates</h2>
       <p class="text-white/70 mt-2">Extracurricular leadership, event management, and summits.</p>
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="otherCertificatesList">
+        <!-- Injected via JS -->
       </div>
     </div>
   </section>
 
-  <section id="skills" class="section py-16">
+  <!-- Skills & Experience -->
+  <section id="skills" class="section py-16 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-12">
         <div>
-           <h2 class="text-3xl font-bold mb-6">Experience</h2>
+           <h2 class="text-3xl font-bold mb-6 text-white">Experience</h2>
            <div id="experienceList" class="space-y-4"></div>
         </div>
         <div>
-           <h2 class="text-3xl font-bold mb-6">Core Skills</h2>
-           <div class="card p-6">
-             <div id="skillsWrap" class="grid sm:grid-cols-2 gap-4"></div>
+           <h2 class="text-3xl font-bold mb-6 text-white">Core Skills</h2>
+           <div class="card p-6 border-l-4 border-l-primary">
+             <div id="skillsWrap" class="grid sm:grid-cols-1 gap-4"></div>
            </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="section py-16">
+  <!-- Contact -->
+  <section id="contact" class="section py-16 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-8">
         <div>
-          <h2 class="text-3xl font-bold">Contact</h2>
+          <h2 class="text-3xl font-bold text-white">Contact</h2>
           <p class="text-white/70 mt-2">Reach out for academic collaborations, research opportunities, or engineering inquiries.</p>
           <div class="mt-6 grid grid-cols-2 gap-4">
             <a href="mailto:amirshahzad.bme@gmail.com" class="card p-4 flex items-center gap-3 hover:shadow-soft transition">
-              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <svg width="22" height="22" fill="none" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 21l-5-3V7a7 7 0 10-14 0v8a3 3 0 106 0"/></svg>
+              <div class="w-10 h-10 rounded-lg bg-dark border border-white/10 flex items-center justify-center text-primary">
+                <svg width="22" height="22" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
               </div>
               <div>
-                <div class="font-medium">Email</div>
-                <div class="text-sm text-white/60">amirshahzad.bme@gmail.com</div>
+                <div class="font-medium text-white">Email</div>
+                <div class="text-xs text-white/60">amirshahzad.bme@gmail.com</div>
               </div>
             </a>
             <a href="https://linkedin.com/in/amir-shahzad-098176203" target="_blank" class="card p-4 flex items-center gap-3 hover:shadow-soft transition">
-              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <svg width="22" height="22" fill="none" stroke="white"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 010 8m-8-8a6 6 0 010 8M12 4v3m0 10v3"/></svg>
+              <div class="w-10 h-10 rounded-lg bg-dark border border-white/10 flex items-center justify-center text-primary">
+                <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
               </div>
               <div>
-                <div class="font-medium">LinkedIn</div>
-                <div class="text-sm text-white/60">Amir Shahzad</div>
+                <div class="font-medium text-white">LinkedIn</div>
+                <div class="text-xs text-white/60">Amir Shahzad</div>
               </div>
             </a>
           </div>
@@ -258,17 +317,19 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
     </div>
   </section>
 
-  <footer class="py-10 border-t border-white/10 mt-10">
+  <!-- Footer -->
+  <footer class="py-10 border-t border-white/10 mt-10 bg-black/50">
     <div class="max-w-7xl mx-auto px-4 text-center text-white/60 text-sm">
       © <span id="year"></span> Amir Shahzad. All rights reserved.
     </div>
   </footer>
 
-  <div id="pdfModal" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center bg-black/80 backdrop-blur-sm p-4 md:p-10 transition-opacity">
-    <div class="relative w-full max-w-5xl h-full bg-gray-900 rounded-xl border border-white/20 shadow-2xl overflow-hidden flex flex-col">
+  <!-- Document Modal -->
+  <div id="pdfModal" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center bg-black/90 backdrop-blur-md p-4 md:p-10 transition-opacity">
+    <div class="relative w-full max-w-5xl h-full bg-dark rounded-xl border border-primary/30 shadow-2xl overflow-hidden flex flex-col">
       <div class="flex items-center justify-between p-4 border-b border-white/10 bg-black/50">
         <h3 class="text-white font-medium">Document Viewer</h3>
-        <button onclick="closePdfModal()" class="btn p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white">
+        <button onclick="closePdfModal()" class="btn p-2 rounded-lg border border-white/10 hover:border-primary text-white hover:text-primary transition-colors">
           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
@@ -280,6 +341,7 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
   </div>
 
   <script>
+    // State populated explicitly with provided portfolio source data
     const state = {
       about: {
         avatar: "Profile_pic.png" 
@@ -404,14 +466,13 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
       ]
     };
 
-    // Modal Logic
+    // Modal Document Viewer Logic
     function openPdfModal(fileUrl) {
       if (!fileUrl) return;
       
       const iframe = document.getElementById('pdfIframe');
       const img = document.getElementById('modalImage');
       
-      // Check if the file is an image based on extension
       const isImage = fileUrl.match(/\.(jpeg|jpg|gif|png)$/i) != null;
       
       if (isImage) {
@@ -441,9 +502,10 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
       document.body.style.overflow = ''; 
     }
 
+    // Render Functions
     function renderAbout() {
       if (state.about.avatar) {
-          document.getElementById('heroImageContainer').innerHTML = `<img src="${state.about.avatar}" alt="Amir Shahzad" class="w-full h-full object-contain">`;
+          document.getElementById('heroImageContainer').innerHTML = `<img src="${state.about.avatar}" alt="Amir Shahzad" class="h-full w-auto object-contain drop-shadow-2xl">`;
           document.getElementById('navAvatarContainer').innerHTML = `<img src="${state.about.avatar}" alt="AS" class="w-full h-full object-cover object-top">`;
       }
     }
@@ -453,11 +515,11 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
       wrap.innerHTML = '';
       state.projects.forEach((p) => {
         const card = document.createElement('div');
-        card.className = 'card flex flex-col hover:shadow-glow transition-all duration-300 transform hover:-translate-y-1';
+        card.className = 'card flex flex-col transition-all duration-300 transform hover:-translate-y-1';
 
         let mediaHtml = '';
         if (p.media && p.media.length > 0) {
-           mediaHtml = `<div class="w-full flex overflow-x-auto media-scroller snap-x snap-mandatory bg-gray-900 border-b border-white/10" style="height: 220px;">`;
+           mediaHtml = `<div class="w-full flex overflow-x-auto media-scroller snap-x snap-mandatory bg-dark border-b border-white/10" style="height: 220px;">`;
            p.media.forEach(m => {
               if (m.type === 'image') {
                  mediaHtml += `<div class="min-w-full h-full snap-center flex-shrink-0 flex items-center justify-center bg-black/50"><img src="${m.url}" alt="${p.title}" class="h-full w-full object-contain"></div>`;
@@ -474,7 +536,7 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
         if (p.file) {
            fileLinkHtml = `
               <div class="mt-4 pt-4 border-t border-white/10">
-                 <button onclick="openPdfModal('${p.file}')" class="text-sm text-primary hover:text-accent flex items-center gap-1 font-medium transition cursor-pointer">
+                 <button onclick="openPdfModal('${p.file}')" class="text-sm text-primary hover:text-accent flex items-center gap-1 font-semibold transition cursor-pointer uppercase tracking-wide">
                     View Document 
                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                  </button>
@@ -487,12 +549,12 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
           <div class="p-6 flex flex-col h-full justify-between">
             <div>
               <h3 class="text-xl font-bold mb-1 text-white">${p.title}</h3>
-              <div class="text-accent text-sm font-semibold mb-4 uppercase tracking-wider">${p.lang}</div>
+              <div class="text-primary text-sm font-bold mb-4 uppercase tracking-wider">${p.lang}</div>
               <div class="text-white/70 text-sm mb-4 leading-relaxed list-disc ml-4 space-y-1">${p.desc}</div>
             </div>
             <div>
               <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-white/10">
-                ${(p.tags || []).map(t => `<span class="badge text-xs px-2 py-1 rounded-md bg-white/5 border-white/10">${t}</span>`).join('')}
+                ${(p.tags || []).map(t => `<span class="badge text-xs px-2 py-1 rounded-md text-white/80">${t}</span>`).join('')}
               </div>
               ${fileLinkHtml}
             </div>
@@ -507,17 +569,17 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
        wrap.innerHTML = '';
        state.achievements.forEach(ach => {
           const innerContent = `
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center flex-shrink-0">
-                   <svg width="20" height="20" fill="none" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                <div class="w-10 h-10 rounded-full bg-dark border border-primary/40 flex items-center justify-center flex-shrink-0 text-primary">
+                   <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
                 </div>
                 <div class="text-sm text-white/90 font-medium flex-1">${ach.title}</div>
-                ${ach.file ? `<svg width="16" height="16" fill="none" stroke="#14B8A6" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>` : ''}
+                ${ach.file ? `<svg width="16" height="16" fill="none" stroke="#D4AF37" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>` : ''}
           `;
           
           if (ach.file) {
-             wrap.innerHTML += `<div onclick="openPdfModal('${ach.file}')" class="card p-4 flex items-center gap-4 hover:bg-white/5 transition hover:-translate-y-1 cursor-pointer">${innerContent}</div>`;
+             wrap.innerHTML += `<div onclick="openPdfModal('${ach.file}')" class="card p-4 flex items-center gap-4 hover:border-primary/50 transition hover:-translate-y-1 cursor-pointer">${innerContent}</div>`;
           } else {
-             wrap.innerHTML += `<div class="card p-4 flex items-center gap-4 hover:bg-white/5 transition">${innerContent}</div>`;
+             wrap.innerHTML += `<div class="card p-4 flex items-center gap-4 hover:border-primary/50 transition">${innerContent}</div>`;
           }
        });
     }
@@ -527,14 +589,14 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
        wrap.innerHTML = '';
        state.certificates.forEach(c => {
           wrap.innerHTML += `
-             <div class="card p-5 flex flex-col justify-between hover:-translate-y-1 transition">
+             <div class="card p-5 flex flex-col justify-between hover:-translate-y-1 transition hover:border-primary/50">
                 <div>
-                   <div class="text-xs text-accent font-bold tracking-wide uppercase mb-1">${c.year}</div>
+                   <div class="text-xs text-primary font-bold tracking-wide uppercase mb-1">${c.year}</div>
                    <h3 class="font-semibold text-md text-white mb-1">${c.title}</h3>
                    <div class="text-sm text-white/60">${c.issuer}</div>
                 </div>
                 <div class="mt-4 pt-4 border-t border-white/10">
-                   <button onclick="openPdfModal('${c.file}')" class="text-sm text-primary hover:text-accent flex items-center gap-1 font-medium transition cursor-pointer">
+                   <button onclick="openPdfModal('${c.file}')" class="text-sm text-primary hover:text-accent flex items-center gap-1 font-semibold transition cursor-pointer uppercase tracking-wide">
                       View Certificate 
                       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                    </button>
@@ -550,14 +612,14 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
        wrap.innerHTML = '';
        state.otherCertificates.forEach(c => {
           wrap.innerHTML += `
-             <div class="card p-5 flex flex-col justify-between hover:-translate-y-1 transition">
+             <div class="card p-5 flex flex-col justify-between hover:-translate-y-1 transition hover:border-primary/50">
                 <div>
-                   <div class="text-xs text-accent font-bold tracking-wide uppercase mb-1">${c.year}</div>
+                   <div class="text-xs text-primary font-bold tracking-wide uppercase mb-1">${c.year}</div>
                    <h3 class="font-semibold text-md text-white mb-1">${c.title}</h3>
                    <div class="text-sm text-white/60">${c.issuer}</div>
                 </div>
                 <div class="mt-4 pt-4 border-t border-white/10">
-                   <button onclick="openPdfModal('${c.file}')" class="text-sm text-primary hover:text-accent flex items-center gap-1 font-medium transition cursor-pointer">
+                   <button onclick="openPdfModal('${c.file}')" class="text-sm text-primary hover:text-accent flex items-center gap-1 font-semibold transition cursor-pointer uppercase tracking-wide">
                       View Certificate 
                       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                    </button>
@@ -572,12 +634,12 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
       wrap.innerHTML = '';
       state.skills.forEach(s => {
         wrap.innerHTML += `
-          <div class="p-3 bg-white/5 rounded-lg border border-white/10">
+          <div class="p-4 bg-white/[0.02] rounded-lg border border-white/10 hover:border-primary/30 transition-colors">
             <div class="flex items-center justify-between mb-2">
-              <div class="font-medium text-sm">${s.name}</div>
-              <div class="text-xs text-accent">${s.value}%</div>
+              <div class="font-medium text-sm text-white">${s.name}</div>
+              <div class="text-xs text-primary font-bold">${s.value}%</div>
             </div>
-            <div class="w-full h-1.5 bg-black/40 rounded-full overflow-hidden">
+            <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden">
                <div class="h-full bg-gradient-to-r from-primary to-accent" style="width:${s.value}%"></div>
             </div>
           </div>
@@ -593,7 +655,7 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
         if (e.file) {
            fileLinkHtml = `
               <div class="mt-4 pt-4 border-t border-white/10">
-                 <button onclick="openPdfModal('${e.file}')" class="text-sm text-primary hover:text-accent flex items-center gap-1 font-medium transition cursor-pointer">
+                 <button onclick="openPdfModal('${e.file}')" class="text-sm text-primary hover:text-accent flex items-center gap-1 font-semibold transition cursor-pointer uppercase tracking-wide">
                     View Document 
                     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                  </button>
@@ -602,11 +664,11 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
         }
 
         list.innerHTML += `
-          <div class="card p-5 hover:bg-white/5 transition flex flex-col justify-between h-full">
+          <div class="card p-5 hover:border-primary/50 transition flex flex-col justify-between h-full border-l-4 border-l-primary">
             <div>
-              <div class="text-xs text-white/50 font-medium tracking-wide mb-1">${e.start} - ${e.end}</div>
+              <div class="text-xs text-white/50 font-mono tracking-wide mb-1">${e.start} - ${e.end}</div>
               <h3 class="text-lg font-bold text-white">${e.role}</h3>
-              <div class="text-accent text-sm font-semibold mb-3">${e.org}</div>
+              <div class="text-primary text-sm font-semibold mb-3">${e.org}</div>
               <p class="text-white/70 text-sm leading-relaxed">${e.desc}</p>
             </div>
             ${fileLinkHtml}
@@ -615,6 +677,7 @@ and Python/MATLAB pipelines for data analysis and Design of IoT-based Diagnostic
       });
     }
 
+    // Execution
     renderAbout();
     renderProjects();
     renderAchievements();
