@@ -122,6 +122,12 @@
       animation: spin-triangle 12s linear infinite;
       transform-origin: center center;
     }
+
+    /* Modern Dynamic Skill Bar Transition */
+    .skill-bar {
+      width: 0;
+      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
   </style>
 </head>
 <body class="font-sans antialiased">
@@ -261,8 +267,8 @@
         </div>
         <div>
            <h2 class="text-3xl font-bold mb-6 text-white">Core Skills</h2>
-           <div class="card p-6 border-l-4 border-l-primary">
-             <div id="skillsWrap" class="grid sm:grid-cols-1 gap-4"></div>
+           <div class="card p-6 border-l-4 border-l-primary h-full">
+             <div id="skillsWrap" class="grid sm:grid-cols-1 gap-5"></div>
            </div>
         </div>
       </div>
@@ -612,19 +618,58 @@
     function renderSkills() {
       const wrap = document.getElementById('skillsWrap');
       wrap.innerHTML = '';
-      state.skills.forEach(s => {
+      
+      state.skills.forEach((s) => {
         wrap.innerHTML += `
-          <div class="p-4 bg-white/[0.02] rounded-lg border border-white/10 hover:border-primary/30 transition-colors">
-            <div class="flex items-center justify-between mb-2">
-              <div class="font-medium text-sm text-white">${s.name}</div>
-              <div class="text-xs text-primary font-bold">${s.value}%</div>
+          <div class="p-5 bg-white/[0.02] rounded-xl border border-white/5 hover:border-primary/30 transition-all duration-300 group">
+            <div class="flex items-center justify-between mb-3">
+              <div class="font-medium text-sm text-white flex items-center gap-2">
+                <svg class="w-4 h-4 text-primary group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                ${s.name}
+              </div>
+              <div class="text-xs text-primary font-bold"><span class="skill-value" data-target="${s.value}">0</span>%</div>
             </div>
             <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden">
-               <div class="h-full bg-gradient-to-r from-primary to-accent" style="width:${s.value}%"></div>
+               <div class="h-full bg-gradient-to-r from-primary to-accent skill-bar" data-width="${s.value}%"></div>
             </div>
           </div>
         `;
       });
+
+      // Animated filling of progress bars using Intersection Observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const bars = entry.target.querySelectorAll('.skill-bar');
+            const values = entry.target.querySelectorAll('.skill-value');
+            
+            bars.forEach(bar => {
+              bar.style.width = bar.getAttribute('data-width');
+            });
+
+            values.forEach(val => {
+              const target = parseInt(val.getAttribute('data-target'));
+              let current = 0;
+              const increment = target / 40; 
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                  val.innerText = target;
+                  clearInterval(timer);
+                } else {
+                  val.innerText = Math.ceil(current);
+                }
+              }, 30);
+            });
+            
+            observer.unobserve(entry.target); 
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(document.getElementById('skills'));
     }
 
     function renderExperience() {
